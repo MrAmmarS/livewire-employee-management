@@ -18,10 +18,10 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin.min.css') }}" rel="stylesheet">
-    @livewireStyles 
+    @livewireStyles
 </head>
 
 <body id="page-top">
@@ -42,7 +42,8 @@
             <hr class="sidebar-divider">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="/employees">
+                {{-- <a class="nav-link" href="{{ route('employees.index') }}"> --}}
+                <a class="nav-link" href="#">
                     <span>Employee Management</span></a>
             </li>
 
@@ -58,10 +59,14 @@
                 </a>
                 <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        {{-- <a class="collapse-item" href="{{ route('countries.index') }}">Country</a>
+                        <a class="collapse-item" href="{{ route('states.index') }}">State</a>
+                        <a class="collapse-item" href="{{ route('cities.index') }}">City</a>
+                        <a class="collapse-item" href="{{ route('departments.index') }}">Department</a> --}}
                         <a class="collapse-item" href="#">Country</a>
-                        <a class="collapse-item" href="#State</a>
-                        <a class="collapse-item" href="#">Department</a>
+                        <a class="collapse-item" href="#">State</a>
                         <a class="collapse-item" href="#">City</a>
+                        <a class="collapse-item" href="#">Department</a>
                     </div>
                 </div>
             </li>
@@ -134,7 +139,6 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     {{ $slot }}
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -145,7 +149,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Emloyee Management 2022</span>
+                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
             </footer>
@@ -163,15 +167,31 @@
     </a>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
+    </script>
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin.min.js') }}"></script>
-
     @stack('modals')
     @livewireScripts
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        window.addEventListener('modal', event => {
+            $(event.detail.modalId).modal(event.detail.actionModal)
+        })
+    </script>
+    <script>
+        $("#birthDate").flatpickr();
+        $("#dateHired").flatpickr();
+    </script>
 </body>
 
-</html> 
+</html>
