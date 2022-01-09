@@ -11,6 +11,7 @@ class UserIndex extends Component
 {
     use WithPagination;
 
+    
     public $search = '';
     public $username;
     public $firstName;
@@ -19,7 +20,6 @@ class UserIndex extends Component
     public $password;
     public $userId;
     public $editMode =false;
-    
     protected $rules = [
         'username' => 'required',
         'firstName' => 'required',
@@ -27,19 +27,6 @@ class UserIndex extends Component
         'password' => 'required',
         'email' => 'required|email',
     ];
-
-    public function render()
-    {
-        $users = User::paginate(5);
-        if (strlen($this->search) > 2) {
-            $users = User::where('username', 'like', "%{$this->search}%")->paginate(5);
-        }
-        return view('livewire.users.user-index', [
-            'users' => $users
-        ])
-                 ->layout('layouts.main');
-    }
-
     public function storeUser()
     {
         $this->validate();
@@ -53,7 +40,7 @@ class UserIndex extends Component
        ]);
         $this->reset();
         $this->dispatchBrowserEvent('modal', ['modalId' => '#userModal', 'actionModal' => 'hide']);
-        // session()->flash('user-message', 'User successfully created');
+        session()->flash('user-message', 'User successfully created');
     }
 
     public function showUserModal()
@@ -61,7 +48,6 @@ class UserIndex extends Component
         $this->reset();
         $this->dispatchBrowserEvent('modal', ['modalId' => '#userModal', 'actionModal' => 'show']);
     }
-
     public function showEditModal($id)
     {
         $this->reset();
@@ -109,5 +95,17 @@ class UserIndex extends Component
     {
         $this->dispatchBrowserEvent('modal', ['modalId' => '#userModal', 'actionModal' => 'hide']);
         $this->reset();
+    }
+
+    public function render()
+    {
+        $users = User::paginate(5);
+        if (strlen($this->search) > 2) {
+            $users = User::where('username', 'like', "%{$this->search}%")->paginate(5);
+        }
+        return view('livewire.users.user-index', [
+            'users' => $users
+        ])
+                 ->layout('layouts.main');
     }
 }
